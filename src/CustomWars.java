@@ -4,27 +4,47 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.*;
+
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 public class CustomWars extends Canvas implements Runnable{
 	private static final long serialVersionUID = 7506117823203158228L;
 	
 	boolean RUNNING;
-
-	private static String NAME = "CustomWars";
 	
 	ArrayList<Entity> ENTITY = new ArrayList<>();
 	
 	static CustomWars GAME = new CustomWars();
 
+	private Render RENDER = new Render(this);
+    private Update UPDATE = new Update(this);
+    
+    private static String NAME = "CustomWars";
+    
     static int WIDTH = 800;
     static int HEIGHT = 600;
 
-	private Render RENDER = new Render(this);
-    private Update UPDATE = new Update(this);
-
     private int FACTION_GREEN = 100;
     private int FACTION_ORANGE = 100;
+    
+    static float DEFAULT_MAX_HP = 3000;
+    static float DEFAULT_SPEED = 3;
+    static float DEFAULT_RADIUS_DETECT = 30;
+    static float DEFAULT_RADIUS_ATTACK = 15;
+    static float DEFAULT_DAMAGE = 12;
+    static float DEFAULT_DIAMETER = 6;
+    
+    static int STATS = 15;
+    
+    static float MAX_HP_POINT = 150;
+    static float SPEED_POINT = 0.4f;
+    static float RADIUS_DETECT_POINT = 1.2f;
+    static float RADIUS_ATTACK_POINT = 0.6f;
+    static float DAMAGE_POINT = 1.2f;
+    
+    static int GREEN = 0;
+    static int ORANGE = 0;
 
     public static void main(String[] args){
 		GAME.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -55,10 +75,10 @@ public class CustomWars extends Canvas implements Runnable{
 	
 	void init(){
 		for(int i = 0; i < FACTION_GREEN; i++){
-			ENTITY.add(new Entity(new Random().nextInt(WIDTH) + 2, new Random().nextInt(HEIGHT) + 2, 6, 3, Color.GREEN));
+			ENTITY.add(new Entity(new Random().nextInt(WIDTH), new Random().nextInt(HEIGHT), Color.GREEN));
 		}
 		for(int i = 0; i < FACTION_ORANGE; i++){
-			ENTITY.add(new Entity(new Random().nextInt(WIDTH) + 2, new Random().nextInt(HEIGHT) + 2, 6, 3, Color.ORANGE));
-		}
+			ENTITY.add(new Entity(new Random().nextInt(WIDTH), new Random().nextInt(HEIGHT), Color.ORANGE));
+		};
 	}
 }
