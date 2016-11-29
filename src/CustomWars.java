@@ -3,7 +3,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -25,12 +24,12 @@ public class CustomWars extends Canvas implements Runnable{
     static int WIDTH = 800;
     static int HEIGHT = 600;
 
-    private int FACTION_GREEN = 100;
-    private int FACTION_ORANGE = 100;
+    int FACTION_GREEN = 100;
+    int FACTION_ORANGE = 100;
     
     static float DEFAULT_MAX_HP = 3000;
     static float DEFAULT_SPEED = 3;
-    static float DEFAULT_RADIUS_DETECT = 30;
+    static float DEFAULT_RADIUS_DETECT = 45;
     static float DEFAULT_RADIUS_ATTACK = 15;
     static float DEFAULT_DAMAGE = 12;
     static float DEFAULT_DIAMETER = 6;
@@ -75,10 +74,10 @@ public class CustomWars extends Canvas implements Runnable{
 	
 	void init(){
 		for(int i = 0; i < FACTION_GREEN; i++){
-			ENTITY.add(new Entity(new Random().nextInt(WIDTH), new Random().nextInt(HEIGHT), Color.GREEN));
+			ENTITY.add(new Entity(Color.GREEN));
 		}
 		for(int i = 0; i < FACTION_ORANGE; i++){
-			ENTITY.add(new Entity(new Random().nextInt(WIDTH), new Random().nextInt(HEIGHT), Color.ORANGE));
+			ENTITY.add(new Entity(Color.ORANGE));
 		};
 	}
 }

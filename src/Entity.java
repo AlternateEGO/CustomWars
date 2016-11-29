@@ -7,7 +7,7 @@ import java.util.Random;
 class Entity{
 	double X;
 	double Y;
-	private float SPEED;
+	float SPEED;
 	private double PATH_X;
 	private double PATH_Y;
 	Float DIAMETER;
@@ -25,17 +25,19 @@ class Entity{
 	
 	float REPUTATION;
 	
-	Entity(int x, int y, Color color){
+	long LAST_DAMAGE = System.currentTimeMillis();
+	
+	Entity(Color color){
+		X = new Random().nextInt(CustomWars.WIDTH);
+		Y = new Random().nextInt(CustomWars.HEIGHT);
+		PATH_X = X;
+		PATH_Y = Y;
 		HP = CustomWars.DEFAULT_MAX_HP;
 		MAX_HP = CustomWars.DEFAULT_MAX_HP;
+		RADIUS_DETECT = CustomWars.DEFAULT_RADIUS_DETECT;
         RADIUS_ATTACK = CustomWars.DEFAULT_RADIUS_ATTACK;
-        RADIUS_DETECT = CustomWars.DEFAULT_RADIUS_DETECT;
 		DAMAGE = CustomWars.DEFAULT_DAMAGE;
-		X = x;
-		Y = y;
 		SPEED = CustomWars.DEFAULT_SPEED;
-		PATH_X = x;
-		PATH_Y = y;
 		DIAMETER = CustomWars.DEFAULT_DIAMETER;
 		FACTION = color;
 		
@@ -51,6 +53,21 @@ class Entity{
 		}
 	}
 	
+	Entity(float hp, float speed, float radius_detect, float radius_attack, float damage, Color color){
+		X = new Random().nextInt(CustomWars.WIDTH);
+		Y = new Random().nextInt(CustomWars.HEIGHT);
+		PATH_X = X;
+		PATH_Y = Y;
+		HP = hp;
+		MAX_HP = hp;
+		SPEED = speed;
+		RADIUS_DETECT = radius_detect;
+        RADIUS_ATTACK = radius_attack;
+		DAMAGE = damage;
+		DIAMETER = CustomWars.DEFAULT_DIAMETER;
+		FACTION = color;
+	}
+	
 	void render(Graphics2D graphics){
         graphics.setColor(COLOR_DRAW);
         graphics.draw(new Ellipse2D.Double(X - DIAMETER / 2, Y - DIAMETER / 2, DIAMETER, DIAMETER));
@@ -58,7 +75,10 @@ class Entity{
 	}
 	
 	void update(){
-		if(!LIFE) return;
+		if(System.currentTimeMillis() - LAST_DAMAGE > 1000){
+			LIFE = false;
+			return;
+		}
 		try{
 			COLOR_DRAW = new Color(FACTION.getRed(), FACTION.getGreen(), FACTION.getBlue(), (int)(HP / MAX_HP * 100 * 255 / 100));
 		}catch(IllegalArgumentException e){
@@ -101,12 +121,6 @@ class Entity{
                     Y += speed_y * SPEED;
                 }else Y -= speed_y * SPEED;
             }
-            if(X < 0){
-    		    X = 0;
-            }else if(X > CustomWars.WIDTH) X = CustomWars.WIDTH;
-            if(Y < 0){
-                Y = 0;
-            }else if(Y > CustomWars.HEIGHT) Y = CustomWars.HEIGHT;
         }else{
             double distance = Point2D.distance(X, Y, PATH_X, PATH_Y);
             if(distance < 1){

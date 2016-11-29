@@ -1,11 +1,15 @@
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
 
 class Update{
     private long UPDATE = System.currentTimeMillis();
     private CustomWars GAME = null;
 
-    private int TICK = 35;
+    private int TICK = 50;
 
     Update(CustomWars game){
         GAME = game;
@@ -29,11 +33,15 @@ class Update{
 		                                e.TARGET.REPUTATION -= e.DAMAGE;
 		                        	}
 		                            e.TARGET.HP -= e.DAMAGE;
+		                            e.LAST_DAMAGE = System.currentTimeMillis();
+		                            e.TARGET.LAST_DAMAGE = System.currentTimeMillis();
 		                            if(e.TARGET.HP <= 0){
 			                            e.TARGET.LIFE = false;
 			                        	e.TARGET = null;
 		                            }
 		                        }else{
+		                        	e.TARGET.LIFE = false;
+		                        	e.TARGET = null;
 		                        }
 		                    }
 	                	}else{
@@ -53,12 +61,66 @@ class Update{
                 if(green > orange){
                     CustomWars.GREEN++;
                 }else CustomWars.ORANGE++;
+                
+                Collections.sort(GAME.ENTITY, new EntityComparator());
+                ArrayList<Entity> entity = new ArrayList<>();
+                for(int i = 0; i < 80; i++){
+                	for(int j = 0; j < 10; j++){
+                		Entity e0 = GAME.ENTITY.get(j);
+                		Entity e1 = e0;
+                		while(e0 == e1){
+                			e1 = GAME.ENTITY.get(new Random().nextInt(10));
+                		}
+                		float par0;
+                		float par1;
+                		float par2;
+                		float par3;
+                		float par4;
+                		boolean b = new Random().nextBoolean();
+                		if(b){
+                			par0 = e0.MAX_HP;
+                		}else par0 = e1.MAX_HP;
+                		b = new Random().nextBoolean();
+                		if(b){
+                			par1 = e0.SPEED;
+                		}else par1 = e1.SPEED;
+                		b = new Random().nextBoolean();
+                		if(b){
+                			par2 = e0.RADIUS_DETECT;
+                		}else par2 = e1.RADIUS_DETECT;
+                		b = new Random().nextBoolean();
+                		if(b){
+                			par3 = e0.RADIUS_ATTACK;
+                		}else par3 = e1.RADIUS_ATTACK;
+                		b = new Random().nextBoolean();
+                		if(b){
+                			par4 = e0.DAMAGE;
+                		}else par4 = e1.DAMAGE;
+                		entity.add(new Entity(par0, par1, par2, par3, par4, Color.GREEN));
+                	}
+                }
+                
                 for(int i = GAME.ENTITY.size() - 1; i >= 0; i--){
                 	GAME.ENTITY.remove(i);
                 }
-                GAME.init();
+                
+                for(int i = 0; i < GAME.FACTION_GREEN - 20; i++){
+                	GAME.ENTITY.add(new Entity(Color.GREEN));
+        		}
+        		for(int i = 0; i < GAME.FACTION_ORANGE; i++){
+        			GAME.ENTITY.add(new Entity(Color.ORANGE));
+        		};
                 GAME.RUNNING = true;
             }
+        }
+    }
+    
+    public class EntityComparator implements Comparator<Entity> {
+        @Override
+        public int compare(Entity e0, Entity e1){
+        	Float rep0 = e0.REPUTATION;
+        	Float rep1 = e1.REPUTATION;
+            return rep0.compareTo(rep1);
         }
     }
 }
