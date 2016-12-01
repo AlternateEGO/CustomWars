@@ -9,7 +9,7 @@ class Update{
     private long UPDATE = System.currentTimeMillis();
     private CustomWars GAME = null;
 
-    private int TICK = 50;
+    private int TICK = 35;
     
     ArrayList<Float> REPUTATION = new ArrayList<>();
 
