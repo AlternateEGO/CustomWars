@@ -75,9 +75,9 @@ class Entity{
 	}
 	
 	void update(){
-		if(System.currentTimeMillis() - LAST_DAMAGE > 1000){
-			LIFE = false;
-			return;
+		if(System.currentTimeMillis() - LAST_DAMAGE > 10000){
+			X = new Random().nextInt(CustomWars.WIDTH);
+            Y = new Random().nextInt(CustomWars.HEIGHT);
 		}
 		try{
 			COLOR_DRAW = new Color(FACTION.getRed(), FACTION.getGreen(), FACTION.getBlue(), (int)(HP / MAX_HP * 100 * 255 / 100));

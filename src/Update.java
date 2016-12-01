@@ -10,6 +10,8 @@ class Update{
     private CustomWars GAME = null;
 
     private int TICK = 50;
+    
+    ArrayList<Float> REPUTATION = new ArrayList<>();
 
     Update(CustomWars game){
         GAME = game;
@@ -60,16 +62,25 @@ class Update{
                 GAME.RUNNING = false;
                 if(green > orange){
                     CustomWars.GREEN++;
-                }else CustomWars.ORANGE++;
-                
-                Collections.sort(GAME.ENTITY, new EntityComparator());
+                }else CustomWars.ORANGE++;     
+                ArrayList<Entity> GREEN = new ArrayList<>();
+                for(Entity e : GAME.ENTITY){
+                	if(e.FACTION == Color.GREEN) GREEN.add(e);
+                }
+                Collections.sort(GREEN, new EntityComparator());
+                REPUTATION.add(GREEN.get(0).REPUTATION);
+                float sr = 0;
+                for(float f : REPUTATION){
+                	sr += f;
+                }
+                System.out.println(sr / REPUTATION.size());
                 ArrayList<Entity> entity = new ArrayList<>();
-                for(int i = 0; i < 80; i++){
+                for(int i = 0; i < 8; i++){
                 	for(int j = 0; j < 10; j++){
-                		Entity e0 = GAME.ENTITY.get(j);
+                		Entity e0 = GREEN.get(j);
                 		Entity e1 = e0;
                 		while(e0 == e1){
-                			e1 = GAME.ENTITY.get(new Random().nextInt(10));
+                			e1 = GREEN.get(new Random().nextInt(10));
                 		}
                 		float par0;
                 		float par1;
@@ -104,7 +115,9 @@ class Update{
                 	GAME.ENTITY.remove(i);
                 }
                 
-                for(int i = 0; i < GAME.FACTION_GREEN - 20; i++){
+                GAME.ENTITY = entity;
+                
+                for(int i = 0; i < GAME.FACTION_GREEN - 80; i++){
                 	GAME.ENTITY.add(new Entity(Color.GREEN));
         		}
         		for(int i = 0; i < GAME.FACTION_ORANGE; i++){
@@ -120,7 +133,7 @@ class Update{
         public int compare(Entity e0, Entity e1){
         	Float rep0 = e0.REPUTATION;
         	Float rep1 = e1.REPUTATION;
-            return rep0.compareTo(rep1);
+            return rep1.compareTo(rep0);
         }
     }
 }
