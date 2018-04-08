@@ -2,8 +2,7 @@ import java.awt.BorderLayout
 import java.awt.Canvas
 import java.awt.Color
 import java.awt.Dimension
-import java.util.ArrayList
-
+import java.util.*
 import javax.swing.JFrame
 import javax.swing.WindowConstants
 
@@ -23,12 +22,20 @@ class CustomWars : Canvas(), Runnable {
 
     private fun init() {
         for (i in 0 until 15) {
-            entity.add(EntityLaser(Color.GREEN,0,WIDTH / 2))
+            entity.add(EntityLaser(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityLaser(Color.ORANGE, WIDTH / 2, WIDTH))
         }
         for (i in 0 until 50) {
-            entity.add(EntityGunner(Color.GREEN,0,WIDTH / 2))
+            entity.add(EntityGunner(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityGunner(Color.ORANGE, WIDTH / 2, WIDTH))
+        }
+        for (i in 0 until 23) {
+            entity.add(EntityRocket(Color.GREEN, 0, WIDTH / 2))
+            entity.add(EntityRocket(Color.ORANGE, WIDTH / 2, WIDTH))
+        }
+        for (i in 0 until 5) {
+            entity.add(EntityMortar(Color.GREEN, 0, WIDTH / 2))
+            entity.add(EntityMortar(Color.ORANGE, WIDTH / 2, WIDTH))
         }
     }
 
@@ -44,6 +51,7 @@ class CustomWars : Canvas(), Runnable {
 
         internal var entity = ArrayList<Entity>()
         internal var bullet = ArrayList<Bullet>()
+        internal var effect = ArrayList<Effect>()
 
         private val render = Render()
         private val update = Update(GAME)

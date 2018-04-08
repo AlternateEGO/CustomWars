@@ -21,13 +21,16 @@ internal class Render {
             graphics.color = Color.BLACK
             graphics.fillRect(0, 0, CustomWars.WIDTH, CustomWars.HEIGHT)
             CustomWars.entity.stream().filter({ e -> e.target != null && e is EntityLaser }).filter({ e -> Point2D.distance(e.x, e.y, e.target!!.x, e.target!!.y) <= e.radiusAttack && e.target!!.life && e.life }).filter({ e -> e.target!!.hp > 0 }).forEach { e ->
-                graphics.color = e.faction
+                graphics.color = Color.BLUE
                 graphics.draw(Line2D.Double(e.x, e.y, e.target!!.x, e.target!!.y))
             }
-            for (e in CustomWars.entity) {
+            for (e in CustomWars.effect) {
                 if (e.life) e.render(graphics)
             }
             for (e in CustomWars.bullet) {
+                if (e.life) e.render(graphics)
+            }
+            for (e in CustomWars.entity) {
                 if (e.life) e.render(graphics)
             }
             var green = 0
@@ -44,8 +47,9 @@ internal class Render {
             graphics.color = Color.ORANGE
             graphics.drawString("Orange = $orange", 693, 33)
             graphics.color = Color.WHITE
-            graphics.drawString("Entity = ${CustomWars.entity.size}", 705, 48)
+            graphics.drawString("Entity = ${CustomWars.entity.size + CustomWars.bullet.size + CustomWars.effect.size}", 705, 48)
             graphics.drawString("Bullet = ${CustomWars.bullet.size}", 703, 63)
+            graphics.drawString("Effect = ${CustomWars.effect.size}", 705, 78)
             graphics.dispose()
             bs.show()
         }

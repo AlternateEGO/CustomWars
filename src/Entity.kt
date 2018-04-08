@@ -1,7 +1,7 @@
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.geom.Point2D
-import java.util.Random
+import java.util.*
 
 internal open class Entity(color: Color) {
     var x: Double = 0.toDouble()
@@ -14,17 +14,18 @@ internal open class Entity(color: Color) {
     var maxHP: Float = 0.toFloat()
     var hp: Float = 0.toFloat()
     var radiusAttack: Float = 0.toFloat()
-    var radiusDetect: Float = 0.toFloat()
     var damage: Float = 0.toFloat()
     var lastDamage = 0
+    var radiusDamage = 0.toFloat()
+    var pereodicDamage = 0.toFloat()
 
     var life = true
 
     var target: Entity? = null
 
-    open fun render(graphics: Graphics2D) { }
+    open fun render(graphics: Graphics2D) {}
 
-    open fun update() { }
+    open fun update() {}
 
     fun move() {
         if (target != null) {
@@ -86,9 +87,9 @@ internal open class Entity(color: Color) {
                     distanceY
             }
         }
-        if(x > CustomWars.WIDTH) x = CustomWars.WIDTH.toDouble()
-        if(x < 0) x = 0.0
-        if(y > CustomWars.HEIGHT) y = CustomWars.HEIGHT.toDouble()
-        if(y < 0) y = 0.0
+        if (x > CustomWars.WIDTH) x = CustomWars.WIDTH.toDouble()
+        if (x < 0) x = 0.0
+        if (y > CustomWars.HEIGHT) y = CustomWars.HEIGHT.toDouble()
+        if (y < 0) y = 0.0
     }
 }

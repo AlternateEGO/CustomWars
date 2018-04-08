@@ -23,13 +23,22 @@ internal class Update(game: CustomWars) {
                     e.update()
                 }
             }
+            for (e in CustomWars.effect) {
+                if (e.life) {
+                    e.update()
+                }
+            }
 
             for (i in CustomWars.entity.size - 1 downTo 0) {
-                if(!CustomWars.entity[i].life) CustomWars.entity.removeAt(i)
+                if (!CustomWars.entity[i].life) CustomWars.entity.removeAt(i)
             }
 
             for (i in CustomWars.bullet.size - 1 downTo 0) {
-                if(!CustomWars.bullet[i].life) CustomWars.bullet.removeAt(i)
+                if (!CustomWars.bullet[i].life) CustomWars.bullet.removeAt(i)
+            }
+
+            for (i in CustomWars.effect.size - 1 downTo 0) {
+                if (!CustomWars.effect[i].life) CustomWars.effect.removeAt(i)
             }
 
             var green = 0

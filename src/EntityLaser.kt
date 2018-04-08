@@ -4,7 +4,7 @@ import java.awt.geom.Ellipse2D
 import java.awt.geom.Point2D
 import java.util.*
 
-internal class EntityLaser(color: Color, xMin: Int, xMax: Int) : Entity(color){
+internal class EntityLaser(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     companion object {
         internal const val DEFAULT_MAX_HP = 3000f
         internal const val DEFAULT_SPEED = 2.4f
@@ -20,19 +20,15 @@ internal class EntityLaser(color: Color, xMin: Int, xMax: Int) : Entity(color){
     }
 
     override fun update() {
-        CustomWars.entity.stream().filter({ e -> this !== e && this.faction !== e.faction && e.life }).filter({ e -> Point2D.distance(x, y, e.x, e.y) <= radiusDetect }).forEach { e ->
+        CustomWars.entity.stream().filter({ e -> this !== e && this.faction !== e.faction && e.life }).forEach { e ->
             if (target != null) {
-                if (Point2D.distance(x, y, e.x, e.y) < Point2D.distance(x, y, target!!.x, y)) {
+                if (Point2D.distance(x, y, e.x, e.y) < Point2D.distance(x, y, target!!.x, target!!.y)) {
                     target = e
                 }
             } else {
                 target = e
             }
         }
-        if (target != null)
-            if (Point2D.distance(x, y, target!!.x, target!!.y) > radiusDetect) {
-                target = null
-            }
         move()
         if (target != null) {
             if (target!!.life) {
@@ -61,7 +57,6 @@ internal class EntityLaser(color: Color, xMin: Int, xMax: Int) : Entity(color){
         pathY = y
         hp = DEFAULT_MAX_HP
         maxHP = DEFAULT_MAX_HP
-        radiusDetect = CustomWars.WIDTH.toFloat()
         radiusAttack = DEFAULT_RADIUS_ATTACK
         damage = DEFAULT_DAMAGE
         speed = DEFAULT_SPEED
