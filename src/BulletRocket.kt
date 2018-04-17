@@ -31,12 +31,16 @@ internal class BulletRocket(entity: Entity, target: Entity) : Bullet(entity, tar
         if (life) {
             CustomWars.entity.stream().filter({ e -> entity.faction !== e.faction && e.life && target != e }).forEach { e ->
                 if (e.life) {
-                    if (Point2D.distance(x, y, e.x, e.y) < Point2D.distance(x, y, e.x, e.y)) {
+                    if (target.life){
+                        if (Point2D.distance(x, y, e.x, e.y) < Point2D.distance(x, y, target.x, target.y)) {
+                            target = e
+                        }
+                    } else {
                         target = e
                     }
                 } else target = e
             }
-            if (!target.life) life = false
+            if(!target.life) life = false
             move()
         }
     }

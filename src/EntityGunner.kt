@@ -9,7 +9,7 @@ internal class EntityGunner(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         internal const val DEFAULT_MAX_HP = 1700f
         internal const val DEFAULT_SPEED = 1.4f
         internal const val DEFAULT_RADIUS_ATTACK = 107f
-        internal const val DEFAULT_DAMAGE = 79f
+        internal const val DEFAULT_DAMAGE = 112f
         internal const val DEFAULT_DIAMETER = 4f
         internal const val DEFAULT_SPEED_ATTACK = 50
     }
