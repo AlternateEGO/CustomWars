@@ -19,8 +19,8 @@ internal class Render {
             }
             val graphics = bs.drawGraphics as Graphics2D
             graphics.color = Color.BLACK
-            graphics.fillRect(0, 0, CustomWars.WIDTH, CustomWars.HEIGHT)
-            CustomWars.entity.stream().filter({ e -> e.target != null && e is EntityLaser }).filter({ e -> Point2D.distance(e.x, e.y, e.target!!.x, e.target!!.y) <= e.radiusAttack && e.target!!.life && e.life }).filter({ e -> e.target!!.hp > 0 }).forEach { e ->
+            graphics.fillRect(0, 0, CustomWars.WIDTH + 10, CustomWars.HEIGHT + 10)
+            CustomWars.entity.stream().filter { e -> e.target != null && e is EntityLaser }.filter { e -> Point2D.distance(e.x, e.y, e.target!!.x, e.target!!.y) <= e.radiusAttack && e.target!!.life && e.life }.filter { e -> e.target!!.hp > 0 }.forEach { e ->
                 graphics.color = Color.BLUE
                 graphics.draw(Line2D.Double(e.x, e.y, e.target!!.x, e.target!!.y))
             }

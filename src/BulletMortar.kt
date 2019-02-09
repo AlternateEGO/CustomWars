@@ -20,7 +20,7 @@ internal class BulletMortar(entity: Entity, target: Entity) : Bullet(entity, tar
             val speedY = distanceY / distance
             if (distance <= speedX + 5 || distance <= speedY + 5) {
                 CustomWars.effect.add(EffectMortar(this))
-                CustomWars.entity.stream().filter({ e -> entity.faction !== e.faction && e.life }).filter({ e -> Point2D.distance(x, y, e.x, e.y) <= entity.radiusDamage }).forEach { e ->
+                CustomWars.entity.stream().filter { e -> entity.faction !== e.faction && e.life }.filter { e -> Point2D.distance(x, y, e.x, e.y) <= entity.radiusDamage }.forEach { e ->
                     if (life) {
                         if (e.hp > 0) {
                             e.hp = e.hp.minus(entity.damage)

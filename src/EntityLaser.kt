@@ -20,7 +20,7 @@ internal class EntityLaser(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     }
 
     override fun update() {
-        CustomWars.entity.stream().filter({ e -> this !== e && this.faction !== e.faction && e.life }).forEach { e ->
+        CustomWars.entity.stream().filter { e -> this !== e && this.faction !== e.faction && e.life }.forEach { e ->
             if (target != null) {
                 if (Point2D.distance(x, y, e.x, e.y) < Point2D.distance(x, y, target!!.x, target!!.y)) {
                     target = e

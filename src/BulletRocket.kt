@@ -15,8 +15,9 @@ internal class BulletRocket(entity: Entity, target: Entity) : Bullet(entity, tar
     }
 
     override fun update() {
-        CustomWars.entity.stream().filter({ e -> entity.faction !== e.faction && e.life }).filter({ e -> Point2D.distance(x, y, e.x, e.y) <= e.diameter!! }).forEach { e ->
-            if (life) {
+        if (time >= maxTime) life = false
+        if (life) {
+            CustomWars.entity.stream().filter { e -> entity.faction !== e.faction && e.life }.filter { e -> Point2D.distance(x, y, e.x, e.y) <= e.diameter!! }.forEach { e ->
                 if (e.hp > 0) {
                     e.hp = e.hp.minus(entity.damage)
                     if (e.hp <= 0) {
@@ -25,11 +26,11 @@ internal class BulletRocket(entity: Entity, target: Entity) : Bullet(entity, tar
                 } else {
                     e.life = false
                 }
+                life = false
             }
-            life = false
         }
         if (life) {
-            CustomWars.entity.stream().filter({ e -> entity.faction !== e.faction && e.life && target != e }).forEach { e ->
+            CustomWars.entity.stream().filter { e -> entity.faction !== e.faction && e.life && target != e }.forEach { e ->
                 if (e.life) {
                     if (target.life){
                         if (Point2D.distance(x, y, e.x, e.y) < Point2D.distance(x, y, target.x, target.y)) {
@@ -43,6 +44,7 @@ internal class BulletRocket(entity: Entity, target: Entity) : Bullet(entity, tar
             if(!target.life) life = false
             move()
         }
+        time++
     }
 
     override fun move() {
@@ -67,5 +69,6 @@ internal class BulletRocket(entity: Entity, target: Entity) : Bullet(entity, tar
 
     init {
         speed = 1.6
+        maxTime = 5 * Update.tick
     }
 }

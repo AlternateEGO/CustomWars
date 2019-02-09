@@ -4,7 +4,7 @@ import java.awt.geom.Line2D
 import java.awt.geom.Point2D
 
 internal class BulletGunner(entity: Entity, target: Entity) : Bullet(entity, target) {
-    var xPath = true
+    private var xPath = true
     var yPath = true
 
     override fun render(graphics: Graphics2D) {
@@ -15,7 +15,7 @@ internal class BulletGunner(entity: Entity, target: Entity) : Bullet(entity, tar
     }
 
     override fun update() {
-        CustomWars.entity.stream().filter({ e -> entity.faction !== e.faction && e.life }).filter({ e -> Point2D.distance(x, y, e.x, e.y) <= e.diameter!! + speed / 2 }).forEach { e ->
+        CustomWars.entity.stream().filter { e -> entity.faction !== e.faction && e.life }.filter { e -> Point2D.distance(x, y, e.x, e.y) <= e.diameter!! + speed / 2 }.forEach { e ->
             if (life) {
                 if (e.hp > 0) {
                     e.hp = e.hp.minus(entity.damage)

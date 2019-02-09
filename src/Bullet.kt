@@ -7,6 +7,8 @@ internal open class Bullet(var entity: Entity, var target: Entity) {
     var yTarget = target.y
     var speed = 0.toDouble()
     var life = true
+    var time = 0
+    var maxTime = 0
 
     open fun render(graphics: Graphics2D) {}
 

@@ -4,8 +4,6 @@ internal class Update(game: CustomWars) {
     private var update = System.currentTimeMillis()
     private var game: CustomWars? = null
 
-    private val tick = 35
-
     init {
         this.game = game
     }
@@ -50,5 +48,9 @@ internal class Update(game: CustomWars) {
                     } else
                         orange++
         }
+    }
+
+    companion object {
+        internal const val tick = 35
     }
 }

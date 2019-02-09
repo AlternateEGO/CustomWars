@@ -16,7 +16,7 @@ internal class EffectMortar(override var bullet: Bullet) : Effect(bullet) {
 
     override fun update() {
         if (life) {
-            CustomWars.entity.stream().filter({ e -> bullet.entity.faction !== e.faction && e.life }).filter({ e -> Point2D.distance(x, y, e.x, e.y) <= bullet.entity.radiusDamage }).forEach { e ->
+            CustomWars.entity.stream().filter { e -> bullet.entity.faction !== e.faction && e.life }.filter { e -> Point2D.distance(x, y, e.x, e.y) <= bullet.entity.radiusDamage }.forEach { e ->
                 if (life) {
                     if (e.hp > 0) {
                         e.hp = e.hp.minus(bullet.entity.pereodicDamage)

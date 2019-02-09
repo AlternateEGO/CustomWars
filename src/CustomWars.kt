@@ -37,7 +37,7 @@ class CustomWars : Canvas(), Runnable {
             entity.add(EntityMortar(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityMortar(Color.ORANGE, WIDTH / 2, WIDTH))
         }
-        for (i in 0 until 15) {
+        for (i in 0 until 150) {
             entity.add(EntitySniper(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntitySniper(Color.ORANGE, WIDTH / 2, WIDTH))
         }
