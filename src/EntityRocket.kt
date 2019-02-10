@@ -37,7 +37,9 @@ internal class EntityRocket(color: Color, xMin: Int, xMax: Int) : Entity(color) 
                 if (Point2D.distance(x, y, target!!.x, target!!.y) <= radiusAttack) {
                     if (target!!.hp > 0) {
                         if (lastDamage >= DEFAULT_SPEED_ATTACK) {
-                            CustomWars.bullet.add(BulletRocket(this, target!!))
+                            val bullet: Bullet = BulletRocket(this, target!!)
+                            CustomWars.bullet.add(bullet)
+                            gun(bullet)
                             lastDamage = 0
                         }
                         if (target!!.hp <= 0) {

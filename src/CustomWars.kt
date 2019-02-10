@@ -41,6 +41,10 @@ class CustomWars : Canvas(), Runnable {
             entity.add(EntitySniper(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntitySniper(Color.ORANGE, WIDTH / 2, WIDTH))
         }
+        for (i in 0 until 10) {
+            entity.add(EntityShield(Color.GREEN, 0, WIDTH / 2))
+            entity.add(EntityShield(Color.ORANGE, WIDTH / 2, WIDTH))
+        }
     }
 
     companion object {

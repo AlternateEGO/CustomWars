@@ -37,7 +37,9 @@ internal class EntitySniper(color: Color, xMin: Int, xMax: Int) : Entity(color) 
                 if (Point2D.distance(x, y, target!!.x, target!!.y) <= radiusAttack) {
                     if (target!!.hp > 0) {
                         if (lastDamage >= DEFAULT_SPEED_ATTACK) {
-                            CustomWars.bullet.add(BulletSniper(this, target!!))
+                            val bullet: Bullet = BulletSniper(this, target!!)
+                            CustomWars.bullet.add(bullet)
+                            gun(bullet)
                             lastDamage = 0
                         }
                         if (target!!.hp <= 0) {

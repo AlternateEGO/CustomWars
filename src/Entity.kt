@@ -18,6 +18,10 @@ internal open class Entity(color: Color) {
     var lastDamage = 0
     var radiusDamage = 0.toFloat()
     var pereodicDamage = 0.toFloat()
+    var magazine = 0
+    var maxMagazine = 0
+    var magazineReload = 0
+    var currentReload = 0
 
     var life = true
 
@@ -26,6 +30,10 @@ internal open class Entity(color: Color) {
     open fun render(graphics: Graphics2D) {}
 
     open fun update() {}
+
+    open fun gun(bullet: Bullet) {
+        bullet.faction = faction
+    }
 
     fun move() {
         if (target != null) {
