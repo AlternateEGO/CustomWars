@@ -10,9 +10,9 @@ internal class EntityShield(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         internal const val DEFAULT_SPEED = 0.2f
         internal const val DEFAULT_RADIUS_ATTACK = 10f
         internal const val DEFAULT_DIAMETER = 8f
-        internal const val DEFAULT_MAGAZINE = 10
-        internal const val DEFAULT_MAX_MAGAZINE = 10
-        internal const val DEFAULT_MAGAZINE_RELOAD = 50
+        internal const val DEFAULT_MAGAZINE = 15
+        internal const val DEFAULT_MAX_MAGAZINE = 15
+        internal const val DEFAULT_MAGAZINE_RELOAD = 15
     }
 
     override fun render(graphics: Graphics2D) {
