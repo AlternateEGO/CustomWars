@@ -21,27 +21,27 @@ class CustomWars : Canvas(), Runnable {
     }
 
     private fun init() {
-        for (i in 0 until 15) {
+        for (i in 0 until 35) {
             entity.add(EntityLaser(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityLaser(Color.ORANGE, WIDTH / 2, WIDTH))
         }
-        for (i in 0 until 50) {
+        for (i in 0 until 60) {
             entity.add(EntityGunner(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityGunner(Color.ORANGE, WIDTH / 2, WIDTH))
         }
-        for (i in 0 until 23) {
+        for (i in 0 until 33) {
             entity.add(EntityRocket(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityRocket(Color.ORANGE, WIDTH / 2, WIDTH))
         }
-        for (i in 0 until 5) {
+        for (i in 0 until 3) {
             entity.add(EntityMortar(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityMortar(Color.ORANGE, WIDTH / 2, WIDTH))
         }
-        for (i in 0 until 150) {
+        for (i in 0 until 25) {
             entity.add(EntitySniper(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntitySniper(Color.ORANGE, WIDTH / 2, WIDTH))
         }
-        for (i in 0 until 10) {
+        for (i in 0 until 3) {
             entity.add(EntityShield(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityShield(Color.ORANGE, WIDTH / 2, WIDTH))
         }

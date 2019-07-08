@@ -6,7 +6,7 @@ import java.util.*
 
 internal class EntityShield(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     companion object {
-        internal const val DEFAULT_MAX_HP = 10000f
+        internal const val DEFAULT_MAX_HP = 100f
         internal const val DEFAULT_SPEED = 0.2f
         internal const val DEFAULT_RADIUS_ATTACK = 10f
         internal const val DEFAULT_DIAMETER = 8f
