@@ -12,7 +12,7 @@ internal class EntityMortar(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         internal const val DEFAULT_DAMAGE = 120f
         internal const val DEFAULT_DIAMETER = 20f
         internal const val DEFAULT_SPEED_ATTACK = 78
-        internal const val DEFAULT_RADIUS_DAMAGE = 60f
+        internal const val DEFAULT_RADIUS_DAMAGE = 75f
         internal const val DEFAULT_PEREODIC_DAMAGE = 1f
     }
 

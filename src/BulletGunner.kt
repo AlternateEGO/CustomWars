@@ -5,7 +5,7 @@ import java.awt.geom.Point2D
 
 internal class BulletGunner(entity: Entity, target: Entity) : Bullet(entity, target) {
     private var xPath = true
-    var yPath = true
+    private var yPath = true
 
     override fun render(graphics: Graphics2D) {
         if (life) {

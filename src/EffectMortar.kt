@@ -8,18 +8,18 @@ internal class EffectMortar(bullet: Bullet) : Effect(bullet) {
     override var bullet: Bullet? = bullet
 
     init {
-        time = 255
+        time = 70
         x = bullet.x
         y = bullet.y
+        radius = 0f
     }
 
     override fun render(graphics: Graphics2D) {
         if (life) {
-            val c = Color(Color.BLUE.red, Color.BLUE.green, Color.BLUE.blue, time)
-            val a = bullet!!.entity.radiusDamage
-            graphics.color = c
-            graphics.draw(Ellipse2D.Double(x - a / 2, y - a / 2, a.toDouble(), a.toDouble()))
-            graphics.fillOval((x - a / 2).toInt(), (y - a / 2).toInt(), a.toInt(), a.toInt())
+            radius = bullet!!.entity.radiusDamage
+            graphics.color = Color(Color.RED.red, Color.RED.green, Color.RED.blue, time)
+            graphics.draw(Ellipse2D.Double(x - radius / 2, y - radius / 2, radius.toDouble(), radius.toDouble()))
+            graphics.fillOval((x - radius / 2).toInt(), (y - radius / 2).toInt(), radius.toInt(), radius.toInt())
         }
     }
 

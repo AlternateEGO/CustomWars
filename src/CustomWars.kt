@@ -41,7 +41,7 @@ class CustomWars : Canvas(), Runnable {
             entity.add(EntitySniper(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntitySniper(Color.ORANGE, WIDTH / 2, WIDTH))
         }
-        for (i in 0 until 3) {
+        for (i in 0 until 6) {
             entity.add(EntityShield(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityShield(Color.ORANGE, WIDTH / 2, WIDTH))
         }
@@ -67,7 +67,7 @@ class CustomWars : Canvas(), Runnable {
         @JvmStatic
         fun main(args: Array<String>) {
             GAME.preferredSize = Dimension(WIDTH, HEIGHT)
-            val frame = JFrame(CustomWars.NAME)
+            val frame = JFrame(NAME)
             frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
             frame.layout = BorderLayout()
             frame.add(GAME, BorderLayout.CENTER)
