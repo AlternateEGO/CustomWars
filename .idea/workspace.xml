@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edffdb2e-d875-414c-97b1-80c050b53424" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/admin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/admin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CustomWars/META-INF/CustomWars.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CustomWars/META-INF/CustomWars.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BulletGunner.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/BulletGunner.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CustomWars.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomWars.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Effect.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Effect.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EffectMortar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/EffectMortar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EffectShield.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/EffectShield.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EntityMortar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntityMortar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EntityShield.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntityShield.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,11 +31,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ENABLED_META" value="false" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="customwars" />
+    <property name="META_SYNC_MODE" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="Double&#9;null&#9;null" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549769371240" />
@@ -66,24 +58,15 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -101,11 +84,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Kotlin.CustomWars" />
-      </list>
-    </recent_temporary>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -120,38 +107,8 @@
     </task>
     <servers />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="552" y="181" key="#Plugins" timestamp="1600167070504">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="552" y="181" key="#Plugins/0.0.1920.1080@0.0.1920.1080" timestamp="1600167070504" />
-    <state x="440" y="114" key="#Project_Structure" timestamp="1600166555122">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="440" y="114" key="#Project_Structure/0.0.1920.1080@0.0.1920.1080" timestamp="1600166555122" />
-    <state x="707" y="395" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600168874919">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="707" y="395" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1080@0.0.1920.1080" timestamp="1600168874919" />
-    <state width="938" height="294" key="GridCell.Tab.0.bottom" timestamp="1600169666772">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="938" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1600169666772" />
-    <state width="938" height="294" key="GridCell.Tab.0.center" timestamp="1600169666772">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="938" height="294" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1600169666772" />
-    <state width="938" height="294" key="GridCell.Tab.0.left" timestamp="1600169666772">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="938" height="294" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1600169666772" />
-    <state width="938" height="294" key="GridCell.Tab.0.right" timestamp="1600169666772">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="938" height="294" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1600169666772" />
-    <state x="461" y="185" key="SettingsEditor" timestamp="1600167542360">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="461" y="185" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1600167542360" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
