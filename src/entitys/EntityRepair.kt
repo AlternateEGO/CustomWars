@@ -1,15 +1,19 @@
+package entitys
+
+import CustomWars
+import Entity
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.geom.Ellipse2D
 import java.awt.geom.Point2D
 import java.util.*
 
-internal class EntityLaser(color: Color, xMin: Int, xMax: Int) : Entity(color) {
+internal class EntityRepair(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     companion object {
-        internal const val DEFAULT_MAX_HP = 3000f
-        internal const val DEFAULT_SPEED = 2.4f
-        internal const val DEFAULT_RADIUS_ATTACK = 35f
-        internal const val DEFAULT_DAMAGE = 12f
+        internal const val DEFAULT_MAX_HP = 5000f
+        internal const val DEFAULT_SPEED = 0.8f
+        internal const val DEFAULT_RADIUS_INTERACTION = 35f
+        internal const val DEFAULT_DAMAGE = 7f
         internal const val DEFAULT_DIAMETER = 8f
     }
 
@@ -20,7 +24,7 @@ internal class EntityLaser(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     }
 
     override fun update() {
-        CustomWars.entity.stream().filter { e -> this !== e && this.faction !== e.faction && e.life }.forEach { e ->
+        CustomWars.entity.stream().filter { e -> this !== e && this.faction == e.faction && e.life && e.hp <= e.maxHP && e !is EntityRepair }.forEach { e ->
             if (target != null) {
                 if (Point2D.distance(x, y, e.x, e.y) < Point2D.distance(x, y, target!!.x, target!!.y)) {
                     target = e
@@ -32,15 +36,13 @@ internal class EntityLaser(color: Color, xMin: Int, xMax: Int) : Entity(color) {
         move()
         if (target != null) {
             if (target!!.life) {
-                if (Point2D.distance(x, y, target!!.x, target!!.y) <= radiusAttack) {
-                    if (target!!.hp > 0) {
-                        target!!.hp = target!!.hp.minus(damage)
-                        if (target!!.hp <= 0) {
-                            target!!.life = false
+                if (Point2D.distance(x, y, target!!.x, target!!.y) <= radiusInteraction) {
+                    if (target!!.hp < target!!.maxHP) {
+                        target!!.hp += damage
+                        if (target!!.hp >= target!!.maxHP) {
                             target = null
                         }
                     } else {
-                        target!!.life = false
                         target = null
                     }
                 }
@@ -57,7 +59,7 @@ internal class EntityLaser(color: Color, xMin: Int, xMax: Int) : Entity(color) {
         pathY = y
         hp = DEFAULT_MAX_HP
         maxHP = DEFAULT_MAX_HP
-        radiusAttack = DEFAULT_RADIUS_ATTACK
+        radiusInteraction = DEFAULT_RADIUS_INTERACTION
         damage = DEFAULT_DAMAGE
         speed = DEFAULT_SPEED
         diameter = DEFAULT_DIAMETER

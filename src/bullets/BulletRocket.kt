@@ -1,3 +1,9 @@
+package bullets
+
+import Bullet
+import CustomWars
+import Entity
+import Update
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.geom.Line2D

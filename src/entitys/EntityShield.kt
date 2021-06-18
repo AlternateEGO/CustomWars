@@ -1,3 +1,8 @@
+package entitys
+
+import CustomWars
+import Entity
+import effects.EffectShield
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.geom.Ellipse2D
@@ -6,13 +11,13 @@ import java.util.*
 
 internal class EntityShield(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     companion object {
-        internal const val DEFAULT_MAX_HP = 100f
-        internal const val DEFAULT_SPEED = 0.2f
-        internal const val DEFAULT_RADIUS_DEFENCE = 25f
+        internal const val DEFAULT_MAX_HP = 5000f
+        internal const val DEFAULT_SPEED = 0.3f
+        internal const val DEFAULT_RADIUS_INTERACTION = 25f
         internal const val DEFAULT_DIAMETER = 8f
         internal const val DEFAULT_MAGAZINE = 10
-        internal const val DEFAULT_MAX_MAGAZINE = 10
-        internal const val DEFAULT_MAGAZINE_RELOAD = 15
+        internal const val DEFAULT_MAX_MAGAZINE = 7
+        internal const val DEFAULT_MAGAZINE_RELOAD = 40
     }
 
     override fun render(graphics: Graphics2D) {
@@ -35,7 +40,7 @@ internal class EntityShield(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         if (magazine > 0) {
             CustomWars.bullet.stream().filter { e -> this.faction !== e.faction && e.life }.forEach { e ->
                 if (magazine > 0) {
-                    if (Point2D.distance(x, y, e.x, e.y) < radiusDefence) {
+                    if (Point2D.distance(x, y, e.x, e.y) < radiusInteraction) {
                         magazine--
                         CustomWars.effect.add(EffectShield(e))
                         e.life = false
@@ -57,7 +62,7 @@ internal class EntityShield(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         pathY = y
         hp = DEFAULT_MAX_HP
         maxHP = DEFAULT_MAX_HP
-        radiusDefence = DEFAULT_RADIUS_DEFENCE
+        radiusInteraction = DEFAULT_RADIUS_INTERACTION
         speed = DEFAULT_SPEED
         diameter = DEFAULT_DIAMETER
         magazine = DEFAULT_MAGAZINE

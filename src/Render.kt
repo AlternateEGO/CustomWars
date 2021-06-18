@@ -1,3 +1,5 @@
+import entitys.EntityLaser
+import entitys.EntityRepair
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.geom.Line2D
@@ -19,8 +21,12 @@ internal class Render {
             }
             val graphics = bs.drawGraphics as Graphics2D
             graphics.color = Color.BLACK
-            graphics.fillRect(0, 0, CustomWars.WIDTH + 10, CustomWars.HEIGHT + 10)
-            CustomWars.entity.stream().filter { e -> e.target != null && e is EntityLaser }.filter { e -> Point2D.distance(e.x, e.y, e.target!!.x, e.target!!.y) <= e.radiusAttack && e.target!!.life && e.life }.filter { e -> e.target!!.hp > 0 }.forEach { e ->
+            graphics.fillRect(0, 0, CustomWars.WIDTH + 200 + 10, CustomWars.HEIGHT + 10)
+            CustomWars.entity.stream().filter { e -> e.target != null && e is EntityLaser }.filter { e -> Point2D.distance(e.x, e.y, e.target!!.x, e.target!!.y) <= e.radiusInteraction && e.target!!.life && e.life }.filter { e -> e.target!!.hp > 0 }.forEach { e ->
+                graphics.color = Color.RED
+                graphics.draw(Line2D.Double(e.x, e.y, e.target!!.x, e.target!!.y))
+            }
+            CustomWars.entity.stream().filter { e -> e.target != null && e is EntityRepair }.filter { e -> Point2D.distance(e.x, e.y, e.target!!.x, e.target!!.y) <= e.radiusInteraction && e.target!!.life && e.life }.filter { e -> e.target!!.hp > 0 }.forEach { e ->
                 graphics.color = Color.BLUE
                 graphics.draw(Line2D.Double(e.x, e.y, e.target!!.x, e.target!!.y))
             }
@@ -42,14 +48,16 @@ internal class Render {
                     } else
                         orange++
             }
-            graphics.color = Color.GREEN
-            graphics.drawString("Green = $green", 700, 18)
-            graphics.color = Color.ORANGE
-            graphics.drawString("Orange = $orange", 693, 33)
             graphics.color = Color.WHITE
-            graphics.drawString("Entity = ${CustomWars.entity.size + CustomWars.bullet.size + CustomWars.effect.size}", 705, 48)
-            graphics.drawString("Bullet = ${CustomWars.bullet.size}", 703, 63)
-            graphics.drawString("Effect = ${CustomWars.effect.size}", 705, 78)
+            graphics.drawLine(800,0, 805, 600)
+            graphics.color = Color.GREEN
+            graphics.drawString("Green = $green", 805, 18)
+            graphics.color = Color.ORANGE
+            graphics.drawString("Orange = $orange", 805, 33)
+            graphics.color = Color.WHITE
+            graphics.drawString("Entity = ${CustomWars.entity.size + CustomWars.bullet.size + CustomWars.effect.size}", 905, 48)
+            graphics.drawString("Bullet = ${CustomWars.bullet.size}", 805, 63)
+            graphics.drawString("Effect = ${CustomWars.effect.size}", 805, 78)
             graphics.dispose()
             bs.show()
         }

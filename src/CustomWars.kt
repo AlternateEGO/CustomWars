@@ -1,3 +1,9 @@
+import entitys.*
+import entitys.EntityGunner
+import entitys.EntityLaser
+import entitys.EntityRocket
+import entitys.EntityShield
+import entitys.EntitySniper
 import java.awt.BorderLayout
 import java.awt.Canvas
 import java.awt.Color
@@ -41,9 +47,13 @@ class CustomWars : Canvas(), Runnable {
             entity.add(EntitySniper(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntitySniper(Color.ORANGE, WIDTH / 2, WIDTH))
         }
-        for (i in 0 until 6) {
+        for (i in 0 until 3) {
             entity.add(EntityShield(Color.GREEN, 0, WIDTH / 2))
             entity.add(EntityShield(Color.ORANGE, WIDTH / 2, WIDTH))
+        }
+        for (i in 0 until 5) {
+            entity.add(EntityRepair(Color.GREEN, 0, WIDTH / 2))
+            entity.add(EntityRepair(Color.ORANGE, WIDTH / 2, WIDTH))
         }
     }
 
@@ -66,7 +76,7 @@ class CustomWars : Canvas(), Runnable {
 
         @JvmStatic
         fun main(args: Array<String>) {
-            GAME.preferredSize = Dimension(WIDTH, HEIGHT)
+            GAME.preferredSize = Dimension(WIDTH + 200, HEIGHT)
             val frame = JFrame(NAME)
             frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
             frame.layout = BorderLayout()

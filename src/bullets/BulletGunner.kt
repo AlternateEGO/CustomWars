@@ -1,9 +1,14 @@
+package bullets
+
+import Bullet
+import CustomWars
+import Entity
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.geom.Line2D
 import java.awt.geom.Point2D
 
-internal class BulletSniper(entity: Entity, target: Entity) : Bullet(entity, target) {
+internal class BulletGunner(entity: Entity, target: Entity) : Bullet(entity, target) {
     private var xPath = true
     private var yPath = true
 
@@ -26,6 +31,7 @@ internal class BulletSniper(entity: Entity, target: Entity) : Bullet(entity, tar
                     e.life = false
                 }
             }
+            this.life = false
         }
         move()
     }
@@ -51,7 +57,7 @@ internal class BulletSniper(entity: Entity, target: Entity) : Bullet(entity, tar
     }
 
     init {
-        speed = 27.6
+        speed = 12.6
         xPath = x > target.x
         yPath = y > target.y
     }

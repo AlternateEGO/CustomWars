@@ -1,19 +1,23 @@
+package entitys
+
+import Bullet
+import CustomWars
+import Entity
+import bullets.BulletSniper
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.geom.Ellipse2D
 import java.awt.geom.Point2D
 import java.util.*
 
-internal class EntityMortar(color: Color, xMin: Int, xMax: Int) : Entity(color) {
+internal class EntitySniper(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     companion object {
         internal const val DEFAULT_MAX_HP = 600f
-        internal const val DEFAULT_SPEED = 0.3f
-        internal const val DEFAULT_RADIUS_ATTACK = 286f
-        internal const val DEFAULT_DAMAGE = 120f
-        internal const val DEFAULT_DIAMETER = 20f
-        internal const val DEFAULT_SPEED_ATTACK = 78
-        internal const val DEFAULT_RADIUS_DAMAGE = 75f
-        internal const val DEFAULT_PEREODIC_DAMAGE = 1f
+        internal const val DEFAULT_SPEED = 0.4f
+        internal const val DEFAULT_RADIUS_ATTACK = 315f
+        internal const val DEFAULT_DAMAGE = 69f
+        internal const val DEFAULT_DIAMETER = 2f
+        internal const val DEFAULT_SPEED_ATTACK = 140
     }
 
     override fun render(graphics: Graphics2D) {
@@ -36,10 +40,10 @@ internal class EntityMortar(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         move()
         if (target != null) {
             if (target!!.life) {
-                if (Point2D.distance(x, y, target!!.x, target!!.y) <= radiusAttack) {
+                if (Point2D.distance(x, y, target!!.x, target!!.y) <= radiusInteraction) {
                     if (target!!.hp > 0) {
                         if (lastDamage >= DEFAULT_SPEED_ATTACK) {
-                            val bullet: Bullet = BulletMortar(this, target!!)
+                            val bullet: Bullet = BulletSniper(this, target!!)
                             CustomWars.bullet.add(bullet)
                             gun(bullet)
                             lastDamage = 0
@@ -66,12 +70,10 @@ internal class EntityMortar(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         pathY = y
         hp = DEFAULT_MAX_HP
         maxHP = DEFAULT_MAX_HP
-        radiusAttack = DEFAULT_RADIUS_ATTACK
+        radiusInteraction = DEFAULT_RADIUS_ATTACK
         damage = DEFAULT_DAMAGE
         speed = DEFAULT_SPEED
         diameter = DEFAULT_DIAMETER
         lastDamage = DEFAULT_SPEED_ATTACK
-        radiusDamage = DEFAULT_RADIUS_DAMAGE
-        pereodicDamage = DEFAULT_PEREODIC_DAMAGE
     }
 }
