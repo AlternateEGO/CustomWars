@@ -2,8 +2,8 @@ package bullets
 
 import Bullet
 import CustomWars
-import effects.EffectMortar
 import Entity
+import effects.EffectMortar
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.geom.Ellipse2D
