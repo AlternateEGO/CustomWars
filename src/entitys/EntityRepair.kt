@@ -11,7 +11,8 @@ import java.util.*
 internal class EntityRepair(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     companion object {
         internal const val DEFAULT_MAX_HP = 5000f
-        internal const val DEFAULT_SPEED = 0.8f
+        internal const val DEFAULT_SPEED_MAX = 1.6f
+        internal const val DEFAULT_SPEED_ACCELERATION = 0.014f
         internal const val DEFAULT_RADIUS_INTERACTION = 35f
         internal const val DEFAULT_DAMAGE = 7f
         internal const val DEFAULT_DIAMETER = 8f
@@ -33,7 +34,7 @@ internal class EntityRepair(color: Color, xMin: Int, xMax: Int) : Entity(color) 
                 target = e
             }
         }
-        move()
+        moveAlly()
         if (target != null) {
             if (target!!.life) {
                 if (Point2D.distance(x, y, target!!.x, target!!.y) <= radiusInteraction) {
@@ -61,7 +62,8 @@ internal class EntityRepair(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         maxHP = DEFAULT_MAX_HP
         radiusInteraction = DEFAULT_RADIUS_INTERACTION
         damage = DEFAULT_DAMAGE
-        speed = DEFAULT_SPEED
+        speedAcceleration = DEFAULT_SPEED_ACCELERATION
+        speedMax = DEFAULT_SPEED_MAX
         diameter = DEFAULT_DIAMETER
     }
 }

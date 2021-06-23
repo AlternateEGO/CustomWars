@@ -10,6 +10,12 @@ import java.awt.geom.Line2D
 import java.awt.geom.Point2D
 
 internal class BulletRocket(entity: Entity, target: Entity) : Bullet(entity, target) {
+    companion object {
+        internal const val DEFAULT_SPEED_BASE = 3.4
+        internal const val DEFAULT_SPEED_SLOW = 0.0
+        internal const val DEFAULT_SPEED_ACCELERATION_SLOW = 1.0
+    }
+
     override fun render(graphics: Graphics2D) {
         if (life) {
             graphics.color = Color.PINK
@@ -66,7 +72,9 @@ internal class BulletRocket(entity: Entity, target: Entity) : Bullet(entity, tar
         if (y > target.y) {
             y -= speedY * speed
         } else y += speedY * speed
-
+        if (speed < speedBase) {
+            speed *= 1.025
+        }
         if (x > CustomWars.WIDTH * 2) life = false
         if (x < -CustomWars.WIDTH) life = false
         if (y > CustomWars.HEIGHT * 2) life = false
@@ -74,7 +82,10 @@ internal class BulletRocket(entity: Entity, target: Entity) : Bullet(entity, tar
     }
 
     init {
-        speed = 1.6
+        speedBase = DEFAULT_SPEED_BASE
+        speed = 0.3
+        speedSlow = DEFAULT_SPEED_SLOW
+        speedAccelerationSlow = DEFAULT_SPEED_ACCELERATION_SLOW
         maxTime = 5 * Update.tick
     }
 }

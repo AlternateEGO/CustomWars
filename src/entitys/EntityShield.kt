@@ -12,7 +12,8 @@ import java.util.*
 internal class EntityShield(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     companion object {
         internal const val DEFAULT_MAX_HP = 5000f
-        internal const val DEFAULT_SPEED = 0.3f
+        internal const val DEFAULT_SPEED_MAX = 0.6f
+        internal const val DEFAULT_SPEED_ACCELERATION = 0.007f
         internal const val DEFAULT_RADIUS_INTERACTION = 25f
         internal const val DEFAULT_DIAMETER = 8f
         internal const val DEFAULT_MAGAZINE = 10
@@ -36,7 +37,7 @@ internal class EntityShield(color: Color, xMin: Int, xMax: Int) : Entity(color) 
                 target = e
             }
         }
-        move()
+        moveAlly()
         if (magazine > 0) {
             CustomWars.bullet.stream().filter { e -> this.faction !== e.faction && e.life }.forEach { e ->
                 if (magazine > 0) {
@@ -63,7 +64,8 @@ internal class EntityShield(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         hp = DEFAULT_MAX_HP
         maxHP = DEFAULT_MAX_HP
         radiusInteraction = DEFAULT_RADIUS_INTERACTION
-        speed = DEFAULT_SPEED
+        speedAcceleration = DEFAULT_SPEED_ACCELERATION
+        speedMax = DEFAULT_SPEED_MAX
         diameter = DEFAULT_DIAMETER
         magazine = DEFAULT_MAGAZINE
         maxMagazine = DEFAULT_MAX_MAGAZINE

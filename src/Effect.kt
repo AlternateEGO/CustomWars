@@ -4,8 +4,8 @@ internal open class Effect(open var bullet: Bullet?) {
     var time = 0
     var life = true
     var radius = 0f
-    var x = 0.toDouble()
-    var y = 0.toDouble()
+    var x = 0.0
+    var y = 0.0
     open fun render(graphics: Graphics2D) {}
     open fun update() {
         if (life) {

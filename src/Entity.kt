@@ -1,15 +1,15 @@
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.geom.Point2D
-import java.util.*
-import kotlin.math.sqrt
 
 internal open class Entity(color: Color) {
-    var x: Double = 0.toDouble()
-    var y: Double = 0.toDouble()
-    var speed: Float = 0.toFloat()
-    var pathX: Double = 0.toDouble()
-    var pathY: Double = 0.toDouble()
+    var x: Double = 0.0
+    var y: Double = 0.0
+    private var speedCurrent: Float = 0f
+    var speedAcceleration: Float = 0f
+    var speedMax: Float = 0f
+    var pathX: Double = 0.0
+    var pathY: Double = 0.0
     var diameter: Float? = null
     var faction: Color = color
     var maxHP: Float = 0f
@@ -28,9 +28,6 @@ internal open class Entity(color: Color) {
 
     var target: Entity? = null
 
-    var way : Vector? = Vector(0f, 0f)
-    var vectorSpeed = 0f
-
     open fun render(graphics: Graphics2D) {}
 
     open fun update() {}
@@ -39,28 +36,12 @@ internal open class Entity(color: Color) {
         bullet.faction = faction
     }
 
-    open fun normalize() {
-        vectorSpeed = sqrt(way!!.x * way!!.x + way!!.y * way!!.y)
-        way!!.x *= (1 / vectorSpeed)
-        way!!.y *= (1 / vectorSpeed)
-    }
-
-    open fun addVector(NewWay: Vector) {
-        val entityVec = Vector(0f, 0f)
-        val newVec = Vector(0f, 0f)
-        entityVec.x = way!!.x * vectorSpeed
-        entityVec.y = way!!.y * vectorSpeed
-        newVec.x = NewWay!!.x * speed
-        newVec.y = NewWay!!.y * speed
-        way!!.x = entityVec.x + newVec.x
-        way!!.y = entityVec.y + newVec.y
-        normalize()
-    }
-
-    open fun move() {
-        addVector(Vector(target!!.x.toFloat(), target!!.y.toFloat()))
-        x += way!!.x * vectorSpeed
-        y += way!!.y * vectorSpeed
+    private fun speedMax() {
+        if (speedCurrent > speedMax) {
+            speedCurrent = speedMax
+        } else if (speedCurrent < -speedMax) {
+            speedCurrent = -speedMax
+        }
     }
 
     fun moveEnemy() {
@@ -71,62 +52,38 @@ internal open class Entity(color: Color) {
             val speedX = distanceX / distance
             val speedY = distanceY / distance
             if (distance <= radiusInteraction - 2) {
-                if (x > target!!.x) {
-                    x += speedX * speed
-                } else
-                    x -= speedX * speed
-                if (y > target!!.y) {
-                    y += speedY * speed
-                } else
-                    y -= speedY * speed
+                speedCurrent += speedMax * speedAcceleration
             } else {
-                if (x < target!!.x) {
-                    x += speedX * speed
-                } else
-                    x -= speedX * speed
-                if (y < target!!.y) {
-                    y += speedY * speed
-                } else
-                    y -= speedY * speed
+                speedCurrent -= speedMax * speedAcceleration
             }
-        } else {
-            var distance = Point2D.distance(x, y, pathX, pathY)
-            if (distance < 1) {
-                pathX = Random().nextInt(CustomWars.WIDTH).toDouble()
-                pathY = Random().nextInt(CustomWars.HEIGHT).toDouble()
-                distance = Point2D.distance(x, y, pathX, pathY)
-            }
-            val distanceX = Point2D.distance(x, 0.0, pathX, 0.0)
-            val distanceY = Point2D.distance(0.0, y, 0.0, pathY)
-            val speedX = distanceX / distance
-            val speedY = distanceY / distance
-            if (x < pathX) {
-                x += if (distanceX > speedX * speed) {
-                    speedX * speed
-                } else
-                    distanceX
+            speedMax()
+            if (x > target!!.x) {
+                x += speedX * speedCurrent
             } else {
-                x -= if (distanceX > speedX * speed) {
-                    speedX * speed
-                } else
-                    distanceX
+                x -= speedX * speedCurrent
             }
-            if (y < pathY) {
-                y += if (distanceY > speedY * speed) {
-                    speedY * speed
-                } else
-                    distanceY
+            if (y > target!!.y) {
+                y += speedY * speedCurrent
             } else {
-                y -= if (distanceY > speedY * speed) {
-                    speedY * speed
-                } else
-                    distanceY
+                y -= speedY * speedCurrent
             }
         }
-        if (x > CustomWars.WIDTH) x = CustomWars.WIDTH.toDouble()
-        if (x < 0) x = 0.0
-        if (y > CustomWars.HEIGHT) y = CustomWars.HEIGHT.toDouble()
-        if (y < 0) y = 0.0
+        if (x > CustomWars.WIDTH) {
+            x = CustomWars.WIDTH.toDouble()
+            speedCurrent = 0.0f
+        }
+        if (x < 0) {
+            x = 0.0
+            speedCurrent = 0.0f
+        }
+        if (y > CustomWars.HEIGHT) {
+            y = CustomWars.HEIGHT.toDouble()
+            speedCurrent = 0.0f
+        }
+        if (y < 0) {
+            y = 0.0
+            speedCurrent = 0.0f
+        }
     }
 
     fun moveAlly() {
@@ -137,61 +94,37 @@ internal open class Entity(color: Color) {
             val speedX = distanceX / distance
             val speedY = distanceY / distance
             if (distance <= 10) {
-                if (x > target!!.x) {
-                    x += speedX * speed
-                } else
-                    x -= speedX * speed
-                if (y > target!!.y) {
-                    y += speedY * speed
-                } else
-                    y -= speedY * speed
+                speedCurrent += speedMax * speedAcceleration
             } else {
-                if (x < target!!.x) {
-                    x += speedX * speed
-                } else
-                    x -= speedX * speed
-                if (y < target!!.y) {
-                    y += speedY * speed
-                } else
-                    y -= speedY * speed
+                speedCurrent -= speedMax * speedAcceleration
             }
-        } else {
-            var distance = Point2D.distance(x, y, pathX, pathY)
-            if (distance < 1) {
-                pathX = Random().nextInt(CustomWars.WIDTH).toDouble()
-                pathY = Random().nextInt(CustomWars.HEIGHT).toDouble()
-                distance = Point2D.distance(x, y, pathX, pathY)
-            }
-            val distanceX = Point2D.distance(x, 0.0, pathX, 0.0)
-            val distanceY = Point2D.distance(0.0, y, 0.0, pathY)
-            val speedX = distanceX / distance
-            val speedY = distanceY / distance
-            if (x < pathX) {
-                x += if (distanceX > speedX * speed) {
-                    speedX * speed
-                } else
-                    distanceX
+            speedMax()
+            if (x > target!!.x) {
+                x += speedX * speedCurrent
             } else {
-                x -= if (distanceX > speedX * speed) {
-                    speedX * speed
-                } else
-                    distanceX
+                x -= speedX * speedCurrent
             }
-            if (y < pathY) {
-                y += if (distanceY > speedY * speed) {
-                    speedY * speed
-                } else
-                    distanceY
+            if (y > target!!.y) {
+                y += speedY * speedCurrent
             } else {
-                y -= if (distanceY > speedY * speed) {
-                    speedY * speed
-                } else
-                    distanceY
+                y -= speedY * speedCurrent
             }
         }
-        if (x > CustomWars.WIDTH) x = CustomWars.WIDTH.toDouble()
-        if (x < 0) x = 0.0
-        if (y > CustomWars.HEIGHT) y = CustomWars.HEIGHT.toDouble()
-        if (y < 0) y = 0.0
+        if (x > CustomWars.WIDTH) {
+            x = CustomWars.WIDTH.toDouble()
+            speedCurrent = 0.0f
+        }
+        if (x < 0) {
+            x = 0.0
+            speedCurrent = 0.0f
+        }
+        if (y > CustomWars.HEIGHT) {
+            y = CustomWars.HEIGHT.toDouble()
+            speedCurrent = 0.0f
+        }
+        if (y < 0) {
+            y = 0.0
+            speedCurrent = 0.0f
+        }
     }
 }

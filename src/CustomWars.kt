@@ -58,8 +58,6 @@ class CustomWars : Canvas(), Runnable {
     }
 
     companion object {
-        private const val serialVersionUID = 7506117823203158228L
-
         internal var GAME = CustomWars()
 
         private const val NAME = "Custom Wars"

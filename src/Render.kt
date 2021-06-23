@@ -49,7 +49,7 @@ internal class Render {
                         orange++
             }
             graphics.color = Color.WHITE
-            graphics.drawLine(800,0, 805, 600)
+            graphics.drawLine(800,0, 800, 600)
             graphics.color = Color.GREEN
             graphics.drawString("Green = $green", 805, 18)
             graphics.color = Color.ORANGE

@@ -13,7 +13,8 @@ import java.util.*
 internal class EntityRocket(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     companion object {
         internal const val DEFAULT_MAX_HP = 1200f
-        internal const val DEFAULT_SPEED = 0.7f
+        internal const val DEFAULT_SPEED_MAX = 1.4f
+        internal const val DEFAULT_SPEED_ACCELERATION = 0.01f
         internal const val DEFAULT_RADIUS_ATTACK = 160f
         internal const val DEFAULT_DAMAGE = 1156f
         internal const val DEFAULT_DIAMETER = 12f
@@ -37,7 +38,7 @@ internal class EntityRocket(color: Color, xMin: Int, xMax: Int) : Entity(color) 
                 target = e
             }
         }
-        move()
+        moveEnemy()
         if (target != null) {
             if (target!!.life) {
                 if (Point2D.distance(x, y, target!!.x, target!!.y) <= radiusInteraction) {
@@ -72,7 +73,8 @@ internal class EntityRocket(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         maxHP = DEFAULT_MAX_HP
         radiusInteraction = DEFAULT_RADIUS_ATTACK
         damage = DEFAULT_DAMAGE
-        speed = DEFAULT_SPEED
+        speedAcceleration = DEFAULT_SPEED_ACCELERATION
+        speedMax = DEFAULT_SPEED_MAX
         diameter = DEFAULT_DIAMETER
         lastDamage = DEFAULT_SPEED_ATTACK
     }

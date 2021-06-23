@@ -13,7 +13,8 @@ import java.util.*
 internal class EntityMortar(color: Color, xMin: Int, xMax: Int) : Entity(color) {
     companion object {
         internal const val DEFAULT_MAX_HP = 600f
-        internal const val DEFAULT_SPEED = 0.3f
+        internal const val DEFAULT_SPEED_MAX = 0.6f
+        internal const val DEFAULT_SPEED_ACCELERATION = 0.006f
         internal const val DEFAULT_RADIUS_ATTACK = 286f
         internal const val DEFAULT_DAMAGE = 120f
         internal const val DEFAULT_DIAMETER = 20f
@@ -39,7 +40,7 @@ internal class EntityMortar(color: Color, xMin: Int, xMax: Int) : Entity(color) 
                 target = e
             }
         }
-        move()
+        moveEnemy()
         if (target != null) {
             if (target!!.life) {
                 if (Point2D.distance(x, y, target!!.x, target!!.y) <= radiusInteraction) {
@@ -74,7 +75,8 @@ internal class EntityMortar(color: Color, xMin: Int, xMax: Int) : Entity(color) 
         maxHP = DEFAULT_MAX_HP
         radiusInteraction = DEFAULT_RADIUS_ATTACK
         damage = DEFAULT_DAMAGE
-        speed = DEFAULT_SPEED
+        speedAcceleration = DEFAULT_SPEED_ACCELERATION
+        speedMax = DEFAULT_SPEED_MAX
         diameter = DEFAULT_DIAMETER
         lastDamage = DEFAULT_SPEED_ATTACK
         radiusDamage = DEFAULT_RADIUS_DAMAGE
